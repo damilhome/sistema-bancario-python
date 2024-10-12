@@ -17,7 +17,7 @@ def depositar(saldo, extrato, valor):
     if valor > 0:
         saldo += valor
         extrato += f"Depósito ----- R$ {valor:.2f}\n"
-        return saldo, extrato, f"\nDepósito de R$ {valor} realizado."
+        return saldo, extrato, f"\nDepósito de R$ {valor:.2f} realizado."
     else:
         return "Valor inválido."
 
