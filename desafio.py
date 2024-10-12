@@ -22,19 +22,22 @@ def depositar(saldo, extrato, valor):
         return "Valor inválido."
 
 def sacar(saldo, numero_saques, extrato, valor, limite, LIMITE_SAQUES):
-    if saldo >= valor:
-        if valor <= limite:
-            if numero_saques < LIMITE_SAQUES:
-                saldo -= valor
-                numero_saques += 1
-                extrato += f"Saque -------- R$ {valor:.2f}\n"
-                return saldo, numero_saques, extrato, f"\nSaque de R$ {valor:.2f} realizado"
+    if valor >= 0:
+        if saldo >= valor:
+            if valor <= limite:
+                if numero_saques < LIMITE_SAQUES:
+                    saldo -= valor
+                    numero_saques += 1
+                    extrato += f"Saque -------- R$ {valor:.2f}\n"
+                    return saldo, numero_saques, extrato, f"\nSaque de R$ {valor:.2f} realizado"
+                else:
+                    return saldo, numero_saques, extrato, "\nVocê já atingiu o limite de saques diários (3 saques)."
             else:
-                return saldo, numero_saques, extrato, "\nVocê já atingiu o limite de saques diários (3 saques)."
+                return saldo, numero_saques, extrato, "\nValor acima do limite de saque (R$ 500.00)."
         else:
-            return saldo, numero_saques, extrato, "\nValor acima do limite de saque (R$ 500.00)."
+            return saldo, numero_saques, extrato, "\nSaldo insuficiente."
     else:
-        return saldo, numero_saques, extrato, "\nSaldo insuficiente."
+        return saldo, numero_saques, extrato, "\nValor inválido."
 
 def exibir_extrato(saldo, extrato):
     if not extrato:
